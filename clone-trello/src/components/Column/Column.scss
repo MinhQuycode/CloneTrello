@@ -1,0 +1,74 @@
+@import '../../setting.scss';
+.column {
+    flex: 0 0 auto;
+    width: 300px;
+    height: 95%;
+    &:not(:first-child) {
+        margin-left: $gap;
+    }
+    >* {
+        background-color: #ebecf0;
+        color: #333;
+        padding: 0 8px;
+    }
+    header {
+        padding-left: 15px;
+        height: 36px;
+        line-height: 36px;
+        font-size: 16px;
+        font-weight: bold;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    footer {
+        padding-left: $gap;
+        height: 36px;
+        line-height: 36px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+    ul.task-list {
+        list-style-type: none;
+        margin: 0;
+        max-height: calc(100% - 72px);
+        overflow-y: auto;
+        &::-webkit-scrollbar {
+            -webkit-appearance: none;
+        }
+        &::-webkit-scrollbar:vertical {
+            width: 8px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: darken(#ebecf0, 15);
+            border-radius: $gap;
+            -webkit-border-radius: $gap;
+            -moz-border-radius: $gap;
+            -ms-border-radius: $gap;
+            -o-border-radius: $gap;
+        }
+        li.task-item {
+            background-color: white;
+            padding: $gap;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            -ms-border-radius: 3px;
+            -o-border-radius: 3px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            &:not(:last-child) {
+                margin-bottom: $gap;
+            }
+            img {
+                display: block;
+                width: 100%;
+                height: auto;
+                margin-bottom: $gap;
+                border-radius: 3px;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                -ms-border-radius: 3px;
+                -o-border-radius: 3px;
+            }
+        }
+    }
+}

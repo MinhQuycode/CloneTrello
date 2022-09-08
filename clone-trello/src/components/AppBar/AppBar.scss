@@ -1,0 +1,8 @@
+$navColor: rgb(8, 51, 107);
+.navbar-app {
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    background-color: $navColor;
+    font-size: 1.3rem;
+}
