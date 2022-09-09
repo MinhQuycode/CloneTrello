@@ -12,7 +12,7 @@ li.task-item {
         margin-bottom: $gap;
     }
     img {
-        display: block;
+        display: block !important;
         width: 100%;
         height: auto;
         margin-bottom: $gap;
