@@ -1,5 +1,6 @@
 @import '../../setting.scss';
-li.task-item {
+.task-item {
+    cursor: pointer;
     background-color: white;
     padding: $gap;
     border-radius: 3px;
@@ -8,9 +9,7 @@ li.task-item {
     -ms-border-radius: 3px;
     -o-border-radius: 3px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-    &:not(:last-child) {
-        margin-bottom: $gap;
-    }
+    margin-bottom: $gap;
     img {
         display: block !important;
         width: 100%;

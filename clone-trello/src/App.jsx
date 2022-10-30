@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.scss";
 // Custom component
 import AppBar from "components/AppBar/AppBar";
