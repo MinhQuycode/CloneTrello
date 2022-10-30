@@ -1,8 +1,11 @@
 @import '../../setting.scss';
 .board-contents {
+    height: $board-content-height;
     display: flex;
     overflow-x: auto;
-    margin: 0 $gap $gap;
+    overflow-y: hidden;
+    gap: $gap;
+    // margin: 0 $gap $gap;
     &::-webkit-scrollbar {
         -webkit-appearance: none;
     }
@@ -16,5 +19,29 @@
         -moz-border-radius: $gap;
         -ms-border-radius: $gap;
         -o-border-radius: $gap;
+    }
+    .cards-drop-preview {
+        background-color: rgba(150, 150, 200, 0.1);
+        border: 1px dashed #abc;
+        margin: 5px 45px 5px 5px;
+    }
+    .add-new-column {
+        width: 250px;
+        height: 32px;
+        line-height: 32px;
+        padding: 4px 0 4px 15px;
+        cursor: pointer;
+        color: white;
+        margin-left: $gap;
+        font-size: 15px;
+        background-color: hsla(0, 0%, 100%, .24);
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -ms-border-radius: 5px;
+        -o-border-radius: 5px;
+        &:hover {
+            background-color: hsla(0, 0%, 100%, .34);
+        }
     }
 }

@@ -4,10 +4,16 @@ import "./Card.scss";
 
 const Card = ({ card }) => {
   return (
-    <li className="task-item">
-      {card.cover && <img src={card.cover} alt="Img my work" />}
+    <div className="task-item">
+      {card.cover && (
+        <img
+          src={card.cover}
+          alt="Img my work"
+          onMouseDown={(e) => e.preventDefault()}
+        />
+      )}
       {card.title}
-    </li>
+    </div>
   );
 };
 

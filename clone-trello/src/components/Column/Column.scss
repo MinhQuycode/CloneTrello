@@ -2,16 +2,15 @@
 .column {
     flex: 0 0 auto;
     width: 300px;
-    height: 95%;
-    &:not(:first-child) {
-        margin-left: $gap;
-    }
+    height: calc(#{$board-content-height} - 20px);
+    margin-left: $gap;
     >* {
         background-color: #ebecf0;
         color: #333;
         padding: 0 8px;
     }
     header {
+        cursor: pointer;
         padding-left: 15px;
         height: 36px;
         line-height: 36px;
@@ -26,9 +25,21 @@
         line-height: 36px;
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
+        color: #888;
+        .footer-actions {
+            margin-left: $gap;
+            &:hover {
+                color: #333;
+                cursor: pointer;
+                transition: all 0.25s ease-in;
+                -webkit-transition: all 0.25s ease-in;
+                -moz-transition: all 0.25s ease-in;
+                -ms-transition: all 0.25s ease-in;
+                -o-transition: all 0.25s ease-in;
+            }
+        }
     }
-    ul.task-list {
-        list-style-type: none;
+    div.task-list {
         margin: 0;
         max-height: calc(100% - 72px);
         overflow-y: auto;
@@ -46,7 +57,7 @@
             -ms-border-radius: $gap;
             -o-border-radius: $gap;
         }
-        li.task-item {
+        .task-item {
             background-color: white;
             padding: $gap;
             border-radius: 3px;
@@ -70,5 +81,29 @@
                 -o-border-radius: 3px;
             }
         }
+    }
+    // CSS of library
+    .card-ghost {
+        transition: transform 0.18s ease;
+        transform: rotateZ(5deg);
+        -webkit-transform: rotateZ(5deg);
+        -moz-transform: rotateZ(5deg);
+        -ms-transform: rotateZ(5deg);
+        -o-transform: rotateZ(5deg);
+        font-weight: bold;
+    }
+    .card-ghost-drop {
+        transition: transform 0.18s ease-in-out;
+        transform: rotateZ(0deg);
+        -webkit-transform: rotateZ(0deg);
+        -moz-transform: rotateZ(0deg);
+        -ms-transform: rotateZ(0deg);
+        -o-transform: rotateZ(0deg);
+        font-weight: bold;
+    }
+    .drop-preview {
+        background-color: rgba(150, 150, 200, 0.1);
+        border: 1px dashed #abc;
+        margin: 5px;
     }
 }
