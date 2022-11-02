@@ -1,5 +1,5 @@
 import Column from "components/Column/Column";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Container, Draggable } from "react-smooth-dnd";
 import { isEmpty } from "lodash";
 
@@ -11,6 +11,9 @@ import { applyDrag } from "utils/dragDrop";
 const BoardContent = () => {
   const [board, setBoard] = useState({});
   const [columns, setColumns] = useState([]);
+  const [openNewColumnForm, setOpenNewColumnForm] = useState(false);
+  const [newColumnTitle, setNewColumnTitle] = useState("");
+  const refInput = useRef(null);
 
   useEffect(() => {
     const boardFromDB = initialData.boards.find(
@@ -28,6 +31,18 @@ const BoardContent = () => {
       setColumns(columnsSorted);
     }
   }, []);
+
+  const onNewColumnTitleChange = useCallback(
+    (e) => setNewColumnTitle(e.target.value),
+    []
+  );
+
+  useEffect(() => {
+    if (refInput && refInput.current) {
+      refInput.current.focus();
+      refInput.current.select();
+    }
+  }, [openNewColumnForm]);
 
   if (isEmpty(board)) {
     return <div className="not-found">Board not found!</div>;
@@ -55,6 +70,35 @@ const BoardContent = () => {
     }
   };
 
+  const toggleNewColumn = () => {
+    setOpenNewColumnForm(!openNewColumnForm);
+  };
+
+
+  const addNewColumn = () => {
+    if (!newColumnTitle) {
+      refInput.current.focus();
+      return;
+    }
+
+    const newColumnAdd = {
+      id : Math.random().toString(36).substring(2,5),
+      boardId : board.id,
+      title : newColumnTitle.trim(),
+      cardOrder: [],
+      cards: []
+    }
+    let newColumns = [...columns]
+    newColumns.push(newColumnAdd)
+    let newBoard = { ...board };
+    newBoard.columnOrder = newColumns.map((c) => c.id);
+    newBoard.columns = newColumns;
+    setBoard(newBoard);
+    setColumns(newColumns);
+    setNewColumnTitle('');
+    toggleNewColumn()
+  };
+
   return (
     <div className="board-contents">
       <Container
@@ -76,8 +120,32 @@ const BoardContent = () => {
           );
         })}
       </Container>
-      <div className="add-new-column">
-        <i className="fa fa-plus icon"/> Add another column
+      <div className="add-new-container">
+        {!openNewColumnForm ? (
+          <div className="add-new-column" onClick={toggleNewColumn}>
+            <i className="fa fa-plus icon" /> Add another column
+          </div>
+        ) : (
+          <div className="form-input">
+            <input
+              type="text"
+              placeholder="Enter column title..."
+              className="input-new-column"
+              ref={refInput}
+              value={newColumnTitle}
+              onChange={onNewColumnTitleChange}
+              onKeyDown={e => (e.key === 'Enter') && addNewColumn()}
+            />
+            <div>
+              <button onClick={addNewColumn} className="btn-add">
+                Add column
+              </button>
+              <span className="cancle_column" onClick={toggleNewColumn}>
+                X
+              </span>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
