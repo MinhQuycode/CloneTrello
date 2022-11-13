@@ -18,6 +18,43 @@
         font-weight: bold;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
+        display: flex;
+        .column-title{
+            flex: 90%;
+        }
+        .column-dropdown-action{
+            flex: 10%;
+            .option-dropdown{
+                position: absolute;
+                z-index: 9;
+                min-width: 300px;
+                background: #fff;
+                border-radius: 3px;
+                border: 1px solid #ccc;
+                overflow: hidden;
+                ul{
+                    list-style-type: none;
+                    padding: 10px;
+                    margin: 0;
+                    font-weight: 500;
+                    color: #000000;
+                    li{
+                        padding-left: 5px;
+                        &:hover{
+                            background-color: #ebecf0;
+                        }
+                    }
+                    li:first-child{
+                        font-weight: 600;
+                        border-bottom: 1px solid #000;
+                        &:hover{
+                            background-color: #ffffff;
+                        }
+                    }
+
+                }
+            }
+        }
     }
     footer {
         padding-left: $gap;
