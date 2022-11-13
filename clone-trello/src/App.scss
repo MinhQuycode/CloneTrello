@@ -1,3 +1,4 @@
+// @import "~bootstrap/scss/bootstrap";
 @import 'setting.scss';
 body {
     font-family: 'Poppins';
@@ -14,5 +15,21 @@ body {
     .icon {
         font-size: 14px;
         margin-right: 3px;
+    }
+}
+
+.trelo-content-editable {
+    outline: none;
+    font-weight: inherit;
+    background-color: inherit;
+    border: none;
+    color: rgb(29, 26, 26);
+    border-radius: 5px;
+    font-size: inherit;
+    cursor: pointer;
+    &:focus{
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        padding: 5px 3px;
     }
 }
