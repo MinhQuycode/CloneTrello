@@ -52,14 +52,13 @@
             outline: none;
             line-height: 32px;
             padding: 4px 0 4px 15px;
-            width: 250px;
+            width: 260px;
             font-weight: 600;
-            max-width: 250px;
+            max-width: 260px;
             background-color: rgba(255, 255, 255, 0.815);
             border: none;
             color: rgb(29, 26, 26);
             border-radius: 5px;
-            margin-left: $gap;
             font-size: 15px;
             &::placeholder {
                 color: rgba(29, 26, 26, 0.63);
@@ -71,7 +70,6 @@
             width: 100px;
             color: rgba(29, 26, 26, 0.63);
             font-weight: 600;
-            margin-left: 10px;
             border-radius: 5px;
             -webkit-border-radius: 5px;
             -moz-border-radius: 5px;

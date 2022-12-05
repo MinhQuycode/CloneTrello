@@ -8,11 +8,28 @@ import { useState } from "react";
 import ConfirmModal from "components/Common/ConfirmModal";
 import useClickOutside from "hooks/useClickOutSize";
 import { useRef } from "react";
+import {cloneDeep} from "lodash"
 
 const Column = ({ column, onCardDrop, onUpdateColumn }) => {
   const [showDropDown, setShowDropDown] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [columnTitle, setColumnTitle] = useState("");
+  const [openNewCardForm, setOpenNewCardForm] = useState(false);
+  const toggleNewCard = () => {
+    setOpenNewCardForm(!openNewCardForm);
+  };
+  const [newCardTitle, setNewCardTitle] = useState("");
+  const onNewCardTitleChange = (e) => setNewCardTitle(e.target.value);
+
+  const refInput = useRef(null)
+
+  useEffect(() => {
+    if (refInput && refInput.current) {
+      refInput.current.focus();
+      refInput.current.select();
+    }
+  }, [openNewCardForm]);
+
 
   const handleColumnTitleChange = (e) => {
     setColumnTitle(e.target.value);
@@ -57,6 +74,30 @@ const Column = ({ column, onCardDrop, onUpdateColumn }) => {
       _destroy: true,
     };
     onUpdateColumn(newColumn);
+  };
+
+
+
+  const addNewCard = () => {
+    if (!newCardTitle) {
+      refInput.current.focus();
+      return;
+    }
+
+    const newCardAdd = {
+      id: Math.random().toString(36).substring(2, 5),
+      boardId: column.boardId,
+      title: newCardTitle.trim(),
+      columnId: column.id,
+      cover:null,
+    };
+
+    let newColumn = cloneDeep(column);
+    newColumn.cards.push(newCardAdd)
+    newColumn.cardOrder.push(newCardAdd.id)
+    onUpdateColumn(newColumn)
+    setNewCardTitle("")
+    setOpenNewCardForm(!openNewCardForm)
   };
 
   return (
@@ -118,11 +159,33 @@ const Column = ({ column, onCardDrop, onUpdateColumn }) => {
             );
           })}
         </Container>
+        {openNewCardForm &&  <div className="add-new-card-area">
+        <div className="form-input">
+            <input
+              type="text"
+              placeholder="Enter card title..."
+              className="input-new-column"
+              ref={refInput}
+              value={newCardTitle}
+              onChange={onNewCardTitleChange}
+              onKeyDown={(e) => e.key === "Enter" && addNewCard()}
+            />
+            <div>
+              <button  className="btn-add" onClick={addNewCard}>
+                Add column
+              </button>
+              <span className="cancle_column" onClick={toggleNewCard} >
+                X
+              </span>
+            </div>
+          </div>
+        </div>}
+       
       </div>
       <footer>
-        <div className="footer-actions">
-          <i className="fa fa-plus icon" /> Add another card
-        </div>
+      {!openNewCardForm &&  <div className="footer-actions" onClick={toggleNewCard}>
+          <i className="fa fa-plus icon"/> Add another card
+        </div> }
       </footer>
       <ConfirmModal
         ref={ref}

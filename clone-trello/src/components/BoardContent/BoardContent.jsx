@@ -12,6 +12,9 @@ const BoardContent = () => {
   const [board, setBoard] = useState({});
   const [columns, setColumns] = useState([]);
   const [openNewColumnForm, setOpenNewColumnForm] = useState(false);
+  const toggleNewColumn = () => {
+    setOpenNewColumnForm(!openNewColumnForm);
+  };
   const [newColumnTitle, setNewColumnTitle] = useState("");
   const refInput = useRef(null);
 
@@ -32,10 +35,7 @@ const BoardContent = () => {
     }
   }, []);
 
-  const onNewColumnTitleChange = useCallback(
-    (e) => setNewColumnTitle(e.target.value),
-    []
-  );
+  const onNewColumnTitleChange = (e) => setNewColumnTitle(e.target.value);
 
   useEffect(() => {
     if (refInput && refInput.current) {
@@ -65,14 +65,11 @@ const BoardContent = () => {
       let currentColumn = newColumns.find((item) => item.id === columnId);
       currentColumn.cards = applyDrag(currentColumn.cards, dropResult);
       currentColumn.cardOrder = currentColumn.cards.map((i) => i.id);
-
       setColumns(newColumns);
     }
   };
 
-  const toggleNewColumn = () => {
-    setOpenNewColumnForm(!openNewColumnForm);
-  };
+
 
   const addNewColumn = () => {
     if (!newColumnTitle) {
@@ -118,6 +115,8 @@ const BoardContent = () => {
     setBoard(newBoard);
     setColumns(newColumns);
   };
+
+
 
   return (
     <div className="board-contents">
